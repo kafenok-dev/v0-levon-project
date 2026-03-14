@@ -1,16 +1,21 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Menu, X } from "lucide-react"
+import { Menu, X, Phone, MessageCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const navLinks = [
   { href: "#stats", label: "О клубе" },
+  { href: "#house", label: "Дом Мафии" },
+  { href: "#calendar", label: "Календарь" },
   { href: "#formats", label: "Форматы" },
   { href: "#roles", label: "Роли" },
-  { href: "#pricing", label: "Абонементы" },
   { href: "#events", label: "Мероприятия" },
 ]
+
+const PHONE_NUMBER = "+7 (917) 970 00 70"
+const PHONE_LINK = "tel:+79179700070"
+const TELEGRAM_LINK = "https://t.me/mafia_no1_club"
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -57,14 +62,37 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* CTA Button */}
-          <div className="hidden lg:flex items-center gap-4">
+          {/* CTA Buttons */}
+          <div className="hidden lg:flex items-center gap-3">
+            <a
+              href={PHONE_LINK}
+              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <Phone className="w-4 h-4" />
+              <span className="hidden xl:inline">{PHONE_NUMBER}</span>
+            </a>
+            <Button
+              asChild
+              variant="outline"
+              size="sm"
+              className="border-border hover:bg-card"
+            >
+              <a
+                href={TELEGRAM_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2"
+              >
+                <MessageCircle className="w-4 h-4" />
+                Написать
+              </a>
+            </Button>
             <Button
               asChild
               className="bg-primary hover:bg-primary/90 text-primary-foreground"
             >
               <a
-                href="https://t.me/mafia_club"
+                href={TELEGRAM_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -98,18 +126,42 @@ export default function Header() {
                 {link.label}
               </a>
             ))}
-            <Button
-              asChild
-              className="bg-primary hover:bg-primary/90 text-primary-foreground mt-2"
-            >
+            <div className="flex flex-col gap-3 mt-2 pt-4 border-t border-border">
               <a
-                href="https://t.me/mafia_club"
-                target="_blank"
-                rel="noopener noreferrer"
+                href={PHONE_LINK}
+                className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors py-2"
               >
-                Вступить в клуб
+                <Phone className="w-5 h-5" />
+                {PHONE_NUMBER}
               </a>
-            </Button>
+              <Button
+                asChild
+                variant="outline"
+                className="border-border hover:bg-card"
+              >
+                <a
+                  href={TELEGRAM_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  Написать организатору
+                </a>
+              </Button>
+              <Button
+                asChild
+                className="bg-primary hover:bg-primary/90 text-primary-foreground"
+              >
+                <a
+                  href={TELEGRAM_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Вступить в клуб
+                </a>
+              </Button>
+            </div>
           </nav>
         </div>
       )}

@@ -1,7 +1,8 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { Users, Gamepad2, Calendar, Award } from "lucide-react"
+import { Users, Gamepad2, Calendar, Award, ArrowRight, Dice5, Gamepad, Tv, Coffee, Users2 } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 const stats = [
   {
@@ -12,22 +13,30 @@ const stats = [
   },
   {
     icon: Gamepad2,
-    value: 8000,
+    value: 6000,
     suffix: "+",
     label: "сыгранных игр",
   },
   {
     icon: Calendar,
-    value: 300,
+    value: 500,
     suffix: "+",
     label: "мероприятий",
   },
   {
     icon: Award,
-    value: 5,
-    suffix: " лет",
-    label: "сообщества",
+    value: 4,
+    suffix: " года",
+    label: "существует клуб",
   },
+]
+
+const activities = [
+  { icon: Dice5, label: "Настольные игры" },
+  { icon: Gamepad, label: "Игровые вечера" },
+  { icon: Tv, label: "Консоли" },
+  { icon: Coffee, label: "Лаунж зона" },
+  { icon: Users2, label: "Встречи игроков" },
 ]
 
 function AnimatedCounter({ value, suffix }: { value: number; suffix: string }) {
@@ -82,7 +91,7 @@ export default function StatsSection() {
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-12">
           {stats.map((stat, index) => (
             <div
               key={stat.label}
@@ -105,6 +114,41 @@ export default function StatsSection() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Additional Activities */}
+        <div className="text-center mb-8">
+          <h3 className="text-xl lg:text-2xl font-bold text-foreground mb-6">Дополнительные активности</h3>
+          <div className="flex flex-wrap justify-center gap-4">
+            {activities.map((activity) => (
+              <div
+                key={activity.label}
+                className="flex items-center gap-2 px-4 py-2 rounded-full bg-background/50 border border-border"
+              >
+                <activity.icon className="w-4 h-4 text-primary" />
+                <span className="text-sm text-muted-foreground">{activity.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* CTA */}
+        <div className="text-center">
+          <Button
+            asChild
+            size="lg"
+            className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-6 text-lg rounded-xl"
+          >
+            <a
+              href="https://t.me/mafia_no1_club"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2"
+            >
+              Вступить в Телеграм клуб
+              <ArrowRight className="w-5 h-5" />
+            </a>
+          </Button>
         </div>
       </div>
 

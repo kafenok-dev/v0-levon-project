@@ -1,28 +1,27 @@
 "use client"
 
-import { Cake, Building2, Baby, Lock, ArrowRight } from "lucide-react"
+import { Cake, Building2, Baby, ArrowRight, Phone, MessageCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
+
+const PHONE_NUMBER = "+7 (917) 970 00 70"
+const PHONE_LINK = "tel:+79179700070"
+const TELEGRAM_LINK = "https://t.me/mafia_no1_club"
 
 const events = [
   {
     icon: Cake,
     title: "Дни рождения",
-    description: "Уникальный праздник с игрой в мафию для именинника и гостей",
+    description: "Уникальный праздник с игрой в мафию для именинника и гостей. Мы организуем незабываемое мероприятие с ведущим и призами.",
   },
   {
     icon: Building2,
     title: "Корпоративы",
-    description: "Тимбилдинг и незабываемый вечер для вашей команды",
+    description: "Тимбилдинг и незабываемый вечер для вашей команды. Сплочение коллектива через увлекательную игру.",
   },
   {
     icon: Baby,
     title: "Детские праздники",
-    description: "Увлекательная программа для детей от 10 лет",
-  },
-  {
-    icon: Lock,
-    title: "Закрытые игры",
-    description: "Приватные игры для вашей компании в любое время",
+    description: "Увлекательная программа для детей от 10 лет. Безопасная и весёлая версия игры для юных игроков.",
   },
 ]
 
@@ -74,19 +73,46 @@ export default function EventsSection() {
         </div>
 
         {/* CTA */}
-        <div className="text-center">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Button
             asChild
             size="lg"
-            className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-6 text-lg rounded-xl"
+            className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-6 text-lg rounded-xl"
           >
             <a
-              href="https://t.me/mafia_club"
+              href={TELEGRAM_LINK}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2"
             >
-              Забронировать мероприятие
+              <MessageCircle className="w-5 h-5" />
+              Написать организатору
+            </a>
+          </Button>
+          <Button
+            asChild
+            variant="outline"
+            size="lg"
+            className="w-full sm:w-auto border-border hover:bg-card text-foreground font-semibold px-8 py-6 text-lg rounded-xl"
+          >
+            <a href={PHONE_LINK} className="flex items-center gap-2">
+              <Phone className="w-5 h-5" />
+              Позвонить
+            </a>
+          </Button>
+          <Button
+            asChild
+            variant="outline"
+            size="lg"
+            className="w-full sm:w-auto border-border hover:bg-card text-foreground font-semibold px-8 py-6 text-lg rounded-xl"
+          >
+            <a
+              href={TELEGRAM_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2"
+            >
+              Заказать мероприятие
               <ArrowRight className="w-5 h-5" />
             </a>
           </Button>

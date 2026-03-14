@@ -1,6 +1,7 @@
 "use client"
 
-import { Heart, Sparkles, Brain, Users } from "lucide-react"
+import { Heart, Sparkles, Brain, Users, Calendar, ArrowRight } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 const features = [
   {
@@ -73,6 +74,20 @@ export default function WhyUsSection() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* CTA */}
+        <div className="text-center mt-12">
+          <Button
+            asChild
+            size="lg"
+            className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-6 text-lg rounded-xl"
+          >
+            <a href="#calendar" className="flex items-center gap-2">
+              <Calendar className="w-5 h-5" />
+              Посмотреть календарь игр
+            </a>
+          </Button>
         </div>
       </div>
     </section>

@@ -1,6 +1,7 @@
 "use client"
 
-import { Users, Trophy, Dice5, Palmtree } from "lucide-react"
+import { Users, Trophy, Dice5, Palmtree, ArrowRight } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 const formats = [
   {
@@ -10,6 +11,7 @@ const formats = [
     price: "1200 ₽",
     description: "Классический формат с дискуссиями и голосованиями",
     popular: true,
+    link: "#calendar",
   },
   {
     icon: Trophy,
@@ -18,22 +20,25 @@ const formats = [
     price: "800 ₽",
     description: "Турнирный формат с рейтингом и баллами",
     popular: false,
+    link: "#calendar",
   },
   {
     icon: Dice5,
     title: "Настольные игры",
-    games: "Codenames, Своя игра",
+    games: "Бункер, Своя игра, Codenames",
     price: "и другие",
     description: "Разнообразие настольных игр для любой компании",
     popular: false,
+    link: "#calendar",
   },
   {
     icon: Palmtree,
     title: "Выездные мероприятия",
-    games: "Волейбол, встречи",
+    games: "Волейбол, футбол",
     price: "активности",
     description: "Отдых и развлечения за пределами клуба",
     popular: false,
+    link: "#calendar",
   },
 ]
 
@@ -92,12 +97,35 @@ export default function GameFormatsSection() {
                 <p className="text-sm text-muted-foreground mb-4">{format.games}</p>
 
                 {/* Description */}
-                <p className="text-muted-foreground leading-relaxed mt-auto">
+                <p className="text-muted-foreground leading-relaxed mb-4">
                   {format.description}
                 </p>
+
+                {/* Link */}
+                <a 
+                  href={format.link}
+                  className="inline-flex items-center gap-2 text-primary text-sm font-medium hover:underline mt-auto"
+                >
+                  Смотреть в календаре
+                  <ArrowRight className="w-4 h-4" />
+                </a>
               </div>
             </div>
           ))}
+        </div>
+
+        {/* CTA */}
+        <div className="text-center mt-12">
+          <Button
+            asChild
+            size="lg"
+            className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-6 text-lg rounded-xl"
+          >
+            <a href="#calendar" className="flex items-center gap-2">
+              Смотреть все события в календаре
+              <ArrowRight className="w-5 h-5" />
+            </a>
+          </Button>
         </div>
       </div>
     </section>

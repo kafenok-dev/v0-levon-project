@@ -1,11 +1,11 @@
 "use client"
 
 const galleryItems = [
-  { id: 1, span: "col-span-2 row-span-2", label: "Игроки за столом" },
-  { id: 2, span: "col-span-1 row-span-1", label: "Эмоции" },
-  { id: 3, span: "col-span-1 row-span-1", label: "Интерьер клуба" },
-  { id: 4, span: "col-span-1 row-span-2", label: "Ведущие" },
-  { id: 5, span: "col-span-1 row-span-1", label: "Игровая атмосфера" },
+  { id: 1, span: "col-span-2 row-span-2", label: "Игры" },
+  { id: 2, span: "col-span-1 row-span-1", label: "Игроки" },
+  { id: 3, span: "col-span-1 row-span-1", label: "Атмосфера" },
+  { id: 4, span: "col-span-1 row-span-2", label: "Мероприятия" },
+  { id: 5, span: "col-span-1 row-span-1", label: "Эмоции" },
   { id: 6, span: "col-span-2 row-span-1", label: "Командные фото" },
 ]
 
@@ -19,13 +19,13 @@ export default function GallerySection() {
         {/* Section Header */}
         <div className="text-center mb-12 lg:mb-16">
           <span className="inline-block text-primary text-sm font-semibold tracking-wider uppercase mb-4">
-            Атмосфера
+            Фотографии
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground mb-4 text-balance">
-            Галерея атмосферы
+            Галерея
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Загляните в наш клуб и почувствуйте атмосферу игры
+            Игры, игроки, атмосфера и мероприятия клуба Мафия №1
           </p>
         </div>
 
