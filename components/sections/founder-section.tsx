@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Quote } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 
 const TELEGRAM_LINK = "https://t.me/mafia_no1_club"
 
@@ -44,21 +44,22 @@ export default function FounderSection() {
             <span className="inline-block text-primary text-sm font-semibold tracking-wider uppercase mb-4">
               Основатель клуба
             </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground mb-6 text-balance">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground mb-8 text-balance">
               Левон Карапетян
             </h2>
             
-            {/* Quote */}
-            <div className="relative mb-8">
-              <Quote className="absolute -top-2 -left-2 w-8 h-8 text-primary/20" />
-              <blockquote className="pl-6 border-l-2 border-primary/30">
-                <p className="text-lg lg:text-xl text-foreground/90 leading-relaxed italic mb-4">
+            {/* Quote - Clean design without overlapping elements */}
+            <div className="relative mb-8 p-6 rounded-2xl bg-background/50 border border-border">
+              <div className="text-5xl text-primary/30 font-serif leading-none mb-2">{'"'}</div>
+              <blockquote className="space-y-4">
+                <p className="text-lg lg:text-xl text-foreground/90 leading-relaxed">
                   Я всегда хотел собрать вокруг себя как можно больше интересных, умных и амбициозных людей.
                 </p>
-                <p className="text-lg lg:text-xl text-foreground/90 leading-relaxed italic">
+                <p className="text-lg lg:text-xl text-foreground/90 leading-relaxed">
                   Со временем понял, что мафия — это отличный инструмент для создания сильного сообщества.
                 </p>
               </blockquote>
+              <div className="text-5xl text-primary/30 font-serif leading-none text-right mt-2">{'"'}</div>
             </div>
 
             <p className="text-muted-foreground text-lg leading-relaxed mb-8">
