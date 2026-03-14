@@ -285,22 +285,6 @@ export default function RolesSection() {
           </p>
         </div>
 
-        {/* Team Legend */}
-        <div className="flex flex-wrap justify-center gap-4 mb-10">
-          <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
-            <div className="w-3 h-3 rounded-full bg-primary" />
-            <span className="text-sm text-foreground">Мафия</span>
-          </div>
-          <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-blue-400/10 border border-blue-400/20">
-            <div className="w-3 h-3 rounded-full bg-blue-400" />
-            <span className="text-sm text-foreground">Мирные</span>
-          </div>
-          <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-purple-400/10 border border-purple-400/20">
-            <div className="w-3 h-3 rounded-full bg-purple-400" />
-            <span className="text-sm text-foreground">Нейтральные</span>
-          </div>
-        </div>
-
         {/* All Roles Grid - unified display */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
           {allRoles.map((role) => (

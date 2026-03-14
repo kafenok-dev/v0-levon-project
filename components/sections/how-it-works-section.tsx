@@ -58,18 +58,12 @@ export default function HowItWorksSection() {
           </p>
         </div>
 
-        {/* Timeline */}
+        {/* Steps Grid */}
         <div className="relative mb-12">
-          {/* Connection line - desktop */}
-          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-border -translate-y-1/2" />
-          <div className="hidden lg:block absolute top-1/2 left-0 h-0.5 bg-gradient-to-r from-primary via-primary to-transparent w-full -translate-y-1/2" style={{ width: '20%' }} />
-          
           {/* Steps */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-4">
-            {steps.map((step, index) => (
+            {steps.map((step) => (
               <div key={step.title} className="relative group">
-                {/* Mobile connector */}
-                <div className="lg:hidden absolute left-8 top-20 bottom-0 w-0.5 bg-border" style={{ display: index === steps.length - 1 ? 'none' : 'block' }} />
                 
                 <div className="relative flex flex-col items-center text-center">
                   {/* Step circle */}
