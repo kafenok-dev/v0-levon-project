@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Plus, Edit, Trash2, Eye, EyeOff } from 'lucide-react';
+import { Plus, CreditCard as Edit, Trash2, Eye, EyeOff } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import Link from 'next/link';
 
