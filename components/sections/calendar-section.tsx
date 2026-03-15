@@ -1,8 +1,8 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Calendar, Clock, MapPin, Users, CreditCard, MessageCircle, Phone, Loader2 } from "lucide-react"
-import useSWR from "swr"
 
 const PHONE_LINK = "tel:+79179700070"
 const TELEGRAM_LINK = "https://t.me/mafia_no1_club"
@@ -17,18 +17,6 @@ interface Event {
   price: number
   available_seats: number | null
   location: string
-}
-
-// Fetch events from API route
-async function fetchEvents(): Promise<Event[]> {
-  const response = await fetch('/api/events')
-  
-  if (!response.ok) {
-    const errorData = await response.json().catch(() => ({}))
-    throw new Error(errorData.error || 'Failed to fetch events')
-  }
-  
-  return response.json()
 }
 
 // Format date for display
@@ -74,13 +62,34 @@ function getTypeColor(type: string) {
 }
 
 export default function CalendarSection() {
-  const { data: events, error, isLoading, mutate } = useSWR('events', fetchEvents, {
-    revalidateOnFocus: false,
-    dedupingInterval: 60000, // 1 minute
-    errorRetryCount: 3,
-    errorRetryInterval: 2000,
-    shouldRetryOnError: true,
-  })
+  const [events, setEvents] = useState<Event[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<Error | null>(null)
+
+  const fetchEvents = async () => {
+    setIsLoading(true)
+    setError(null)
+    
+    try {
+      const response = await fetch('/api/events')
+      
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}))
+        throw new Error(errorData.error || 'Failed to fetch events')
+      }
+      
+      const data = await response.json()
+      setEvents(data)
+    } catch (err) {
+      setError(err instanceof Error ? err : new Error('Failed to fetch events'))
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    fetchEvents()
+  }, [])
 
   return (
     <section id="calendar" className="relative py-20 lg:py-32 bg-background">
@@ -112,7 +121,7 @@ export default function CalendarSection() {
             <p className="text-muted-foreground mb-4">Не удалось загрузить события</p>
             <Button
               variant="outline"
-              onClick={() => mutate()}
+              onClick={() => fetchEvents()}
             >
               Попробовать снова
             </Button>
@@ -129,7 +138,7 @@ export default function CalendarSection() {
         )}
 
         {/* Events Grid */}
-        {events && events.length > 0 && (
+        {!isLoading && !error && events.length > 0 && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
             {events.map((event) => {
               const available = event.available_seats !== null && event.available_seats > 0
