@@ -14,39 +14,29 @@ interface Event {
   title: string
   event_date: string
   event_time: string
-  format: string
+  type: string
   price: number
-  spots_available: number
-  max_spots: number
+  available_seats: number
   location: string
   status: string
 }
 
 // Fetch events from Supabase
 async function fetchEvents(): Promise<Event[]> {
-  try {
-    const supabase = createClient()
-    
-    console.log('[v0] Fetching events from Supabase...')
-    
-    const { data, error } = await supabase
-      .from('events')
-      .select('*')
-      .in('status', ['active', 'scheduled'])
-      .order('event_date', { ascending: true })
-      .order('event_time', { ascending: true })
-    
-    if (error) {
-      console.error('[v0] Supabase query error:', error)
-      throw error
-    }
-    
-    console.log('[v0] Events fetched successfully:', data?.length || 0, 'events')
-    return data || []
-  } catch (err) {
-    console.error('[v0] Error in fetchEvents:', err)
-    throw err
+  const supabase = createClient()
+  
+  const { data, error } = await supabase
+    .from('events')
+    .select('*')
+    .in('status', ['active', 'scheduled'])
+    .order('event_date', { ascending: true })
+    .order('event_time', { ascending: true })
+  
+  if (error) {
+    throw error
   }
+  
+  return data || []
 }
 
 // Format date for display
@@ -67,16 +57,16 @@ function formatTime(timeStr: string): string {
   return timeStr.slice(0, 5) // Returns "HH:MM" from "HH:MM:SS"
 }
 
-// Format spots for display
-function formatSpots(available: number, max: number): string {
+// Format seats for display
+function formatSeats(available: number): string {
   if (available <= 0) return "Мест нет"
   if (available === 1) return "1 место"
   if (available >= 2 && available <= 4) return `${available} места`
   return `${available} мест`
 }
 
-function getFormatColor(format: string) {
-  switch (format) {
+function getTypeColor(type: string) {
+  switch (type) {
     case "Городская":
       return "bg-primary/20 text-primary"
     case "Спортивная":
@@ -149,7 +139,7 @@ export default function CalendarSection() {
         {events && events.length > 0 && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
             {events.map((event) => {
-              const available = event.spots_available > 0
+              const available = event.available_seats > 0
               
               return (
                 <div
@@ -160,10 +150,10 @@ export default function CalendarSection() {
                       : "border-border/50 opacity-60"
                   }`}
                 >
-                  {/* Format badge */}
+                  {/* Type badge */}
                   <div className="absolute top-4 right-4">
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium ${getFormatColor(event.format)}`}>
-                      {event.format}
+                    <span className={`px-3 py-1 rounded-full text-xs font-medium ${getTypeColor(event.type)}`}>
+                      {event.type}
                     </span>
                   </div>
 
@@ -190,7 +180,7 @@ export default function CalendarSection() {
                       <div className="flex items-center gap-3 text-muted-foreground">
                         <Users className="w-4 h-4 text-primary flex-shrink-0" />
                         <span className={`text-sm ${!available ? "text-destructive" : ""}`}>
-                          {formatSpots(event.spots_available, event.max_spots)}
+                          {formatSeats(event.available_seats)}
                         </span>
                       </div>
                     </div>
