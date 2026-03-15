@@ -1,28 +1,27 @@
 "use client"
 
-import { Cake, Building2, Baby, Lock, ArrowRight } from "lucide-react"
+import { Cake, Building2, Baby, ArrowRight, Phone, MessageCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
+
+const PHONE_NUMBER = "+7 (917) 970 00 70"
+const PHONE_LINK = "tel:+79179700070"
+const TELEGRAM_LINK = "https://t.me/mafia_no1_club"
 
 const events = [
   {
     icon: Cake,
     title: "Дни рождения",
-    description: "Уникальный праздник с игрой в мафию для именинника и гостей",
+    description: "Уникальный праздник с игрой в мафию для именинника и гостей. Мы организуем незабываемое мероприятие с ведущим и призами.",
   },
   {
     icon: Building2,
     title: "Корпоративы",
-    description: "Тимбилдинг и незабываемый вечер для вашей команды",
+    description: "Тимбилдинг и незабываемый вечер для вашей команды. Сплочение коллектива через увлекательную игру.",
   },
   {
     icon: Baby,
     title: "Детские праздники",
-    description: "Увлекательная программа для детей от 10 лет",
-  },
-  {
-    icon: Lock,
-    title: "Закрытые игры",
-    description: "Приватные игры для вашей компании в любое время",
+    description: "Увлекательная программа для детей от 10 лет. Безопасная и весёлая версия игры для юных игроков.",
   },
 ]
 
@@ -43,50 +42,79 @@ export default function EventsSection() {
           </p>
         </div>
 
-        {/* Events Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          {events.map((event) => (
-            <div
-              key={event.title}
-              className="group relative rounded-2xl bg-card border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 overflow-hidden"
-            >
-              {/* Hover gradient */}
-              <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              
-              <div className="relative p-6 lg:p-8">
-                {/* Icon */}
-                <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors duration-300">
-                  <event.icon className="w-7 h-7 text-primary" />
+        {/* Events Grid - Centered with max 3 cards */}
+        <div className="flex justify-center mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl">
+            {events.map((event) => (
+              <div
+                key={event.title}
+                className="group relative rounded-2xl bg-card border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 overflow-hidden"
+              >
+                {/* Hover gradient */}
+                <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                
+                <div className="relative p-6 lg:p-8 flex flex-col items-center text-center">
+                  {/* Icon */}
+                  <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors duration-300">
+                    <event.icon className="w-7 h-7 text-primary" />
+                  </div>
+                  
+                  {/* Title */}
+                  <h3 className="text-xl font-bold text-foreground mb-3">
+                    {event.title}
+                  </h3>
+                  
+                  {/* Description */}
+                  <p className="text-muted-foreground leading-relaxed">
+                    {event.description}
+                  </p>
                 </div>
-                
-                {/* Title */}
-                <h3 className="text-xl font-bold text-foreground mb-3">
-                  {event.title}
-                </h3>
-                
-                {/* Description */}
-                <p className="text-muted-foreground leading-relaxed">
-                  {event.description}
-                </p>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
         {/* CTA */}
-        <div className="text-center">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Button
             asChild
             size="lg"
-            className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-6 text-lg rounded-xl"
+            className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-6 text-lg rounded-xl"
           >
             <a
-              href="https://t.me/mafia_club"
+              href={TELEGRAM_LINK}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2"
             >
-              Забронировать мероприятие
+              <MessageCircle className="w-5 h-5" />
+              Написать организатору
+            </a>
+          </Button>
+          <Button
+            asChild
+            variant="outline"
+            size="lg"
+            className="w-full sm:w-auto border-border hover:bg-card text-foreground font-semibold px-8 py-6 text-lg rounded-xl"
+          >
+            <a href={PHONE_LINK} className="flex items-center gap-2">
+              <Phone className="w-5 h-5" />
+              Позвонить
+            </a>
+          </Button>
+          <Button
+            asChild
+            variant="outline"
+            size="lg"
+            className="w-full sm:w-auto border-border hover:bg-card text-foreground font-semibold px-8 py-6 text-lg rounded-xl"
+          >
+            <a
+              href={TELEGRAM_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2"
+            >
+              Заказать мероприятие
               <ArrowRight className="w-5 h-5" />
             </a>
           </Button>

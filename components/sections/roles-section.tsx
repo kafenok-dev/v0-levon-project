@@ -1,16 +1,10 @@
 "use client"
 
-import { User, Skull, Shield, Heart, Eye, Crown, Star } from "lucide-react"
+import { User, Skull, Shield, Heart, Eye, Crown, Star, Swords, Sparkles, UserX, Target, Lock, Flame, Link2, Crosshair, Scissors, Bird, Briefcase, Timer } from "lucide-react"
 
-const roles = [
-  {
-    icon: User,
-    name: "Мирный житель",
-    description: "Ищи мафию среди игроков и голосуй за её устранение",
-    color: "text-blue-400",
-    bgColor: "bg-blue-400/10",
-    borderColor: "hover:border-blue-400/50",
-  },
+// All roles in a single unified array (25 roles total)
+const allRoles = [
+  // Mafia roles
   {
     icon: Skull,
     name: "Мафия",
@@ -18,6 +12,71 @@ const roles = [
     color: "text-primary",
     bgColor: "bg-primary/10",
     borderColor: "hover:border-primary/50",
+    team: "mafia",
+  },
+  {
+    icon: Briefcase,
+    name: "Адвокат",
+    description: "Защищает мафию от проверок шерифа",
+    color: "text-primary",
+    bgColor: "bg-primary/10",
+    borderColor: "hover:border-primary/50",
+    team: "mafia",
+  },
+  {
+    icon: Eye,
+    name: "Ниндзя",
+    description: "Убивает бесшумно, без следов",
+    color: "text-primary",
+    bgColor: "bg-primary/10",
+    borderColor: "hover:border-primary/50",
+    team: "mafia",
+  },
+  {
+    icon: Crown,
+    name: "Дон",
+    description: "Лидер мафии с особыми способностями",
+    color: "text-primary",
+    bgColor: "bg-primary/10",
+    borderColor: "hover:border-primary/50",
+    team: "mafia",
+  },
+  {
+    icon: Briefcase,
+    name: "Наёмник",
+    description: "Должен найти мафию и присоединиться",
+    color: "text-primary",
+    bgColor: "bg-primary/10",
+    borderColor: "hover:border-primary/50",
+    team: "mafia",
+  },
+  {
+    icon: Target,
+    name: "Сапёр",
+    description: "Минирует игрока, убивая приходящие роли",
+    color: "text-primary",
+    bgColor: "bg-primary/10",
+    borderColor: "hover:border-primary/50",
+    team: "mafia",
+  },
+  {
+    icon: Heart,
+    name: "Хирург",
+    description: "Может вылечить одного игрока за игру",
+    color: "text-primary",
+    bgColor: "bg-primary/10",
+    borderColor: "hover:border-primary/50",
+    team: "mafia",
+  },
+  // Peace roles
+  {
+    icon: User,
+    name: "Мирный житель",
+    description: "Ищи мафию и голосуй за её устранение",
+    color: "text-blue-400",
+    bgColor: "bg-blue-400/10",
+    borderColor: "hover:border-blue-400/50",
+    team: "peace",
   },
   {
     icon: Shield,
@@ -26,30 +85,70 @@ const roles = [
     color: "text-amber-400",
     bgColor: "bg-amber-400/10",
     borderColor: "hover:border-amber-400/50",
+    team: "peace",
   },
   {
     icon: Heart,
     name: "Доктор",
-    description: "Спасай жителей от ночных нападений мафии",
+    description: "Спасай жителей от ночных нападений",
     color: "text-emerald-400",
     bgColor: "bg-emerald-400/10",
     borderColor: "hover:border-emerald-400/50",
+    team: "peace",
   },
   {
-    icon: Eye,
-    name: "Маньяк",
-    description: "Играешь сам за себя и устраняешь всех",
-    color: "text-purple-400",
-    bgColor: "bg-purple-400/10",
-    borderColor: "hover:border-purple-400/50",
+    icon: Sparkles,
+    name: "Эскортница",
+    description: "Блокирует способность игрока на ночь",
+    color: "text-pink-400",
+    bgColor: "bg-pink-400/10",
+    borderColor: "hover:border-pink-400/50",
+    team: "peace",
   },
   {
-    icon: Crown,
-    name: "Дон мафии",
-    description: "Лидер мафии с особыми способностями",
-    color: "text-primary",
-    bgColor: "bg-primary/10",
-    borderColor: "hover:border-primary/50",
+    icon: Flame,
+    name: "Отчаянный",
+    description: "Может убить игрока при смерти",
+    color: "text-orange-400",
+    bgColor: "bg-orange-400/10",
+    borderColor: "hover:border-orange-400/50",
+    team: "peace",
+  },
+  {
+    icon: Swords,
+    name: "Спецназ",
+    description: "Может убить одного игрока за игру",
+    color: "text-slate-400",
+    bgColor: "bg-slate-400/10",
+    borderColor: "hover:border-slate-400/50",
+    team: "peace",
+  },
+  {
+    icon: Lock,
+    name: "Бессмертный",
+    description: "Выживает после первого убийства",
+    color: "text-cyan-400",
+    bgColor: "bg-cyan-400/10",
+    borderColor: "hover:border-cyan-400/50",
+    team: "peace",
+  },
+  {
+    icon: Target,
+    name: "Стрелочник",
+    description: "Перенаправляет действия на другого игрока",
+    color: "text-yellow-400",
+    bgColor: "bg-yellow-400/10",
+    borderColor: "hover:border-yellow-400/50",
+    team: "peace",
+  },
+  {
+    icon: UserX,
+    name: "Тюремщик",
+    description: "Может заблокировать игрока в тюрьме",
+    color: "text-stone-400",
+    bgColor: "bg-stone-400/10",
+    borderColor: "hover:border-stone-400/50",
+    team: "peace",
   },
   {
     icon: Star,
@@ -58,8 +157,110 @@ const roles = [
     color: "text-sky-400",
     bgColor: "bg-sky-400/10",
     borderColor: "hover:border-sky-400/50",
+    team: "peace",
+  },
+  {
+    icon: User,
+    name: "Чарли",
+    description: "Иммунитет на первое убийство и голосование",
+    color: "text-blue-400",
+    bgColor: "bg-blue-400/10",
+    borderColor: "hover:border-blue-400/50",
+    team: "peace",
+  },
+  {
+    icon: Bird,
+    name: "Феникс",
+    description: "Иммунитет к первому выстрелу",
+    color: "text-orange-400",
+    bgColor: "bg-orange-400/10",
+    borderColor: "hover:border-orange-400/50",
+    team: "peace",
+  },
+  {
+    icon: Timer,
+    name: "Часовщик",
+    description: "Может вернуть ночь обратно",
+    color: "text-cyan-400",
+    bgColor: "bg-cyan-400/10",
+    borderColor: "hover:border-cyan-400/50",
+    team: "peace",
+  },
+  // Neutral roles
+  {
+    icon: Crosshair,
+    name: "Маньяк",
+    description: "Играет сам за себя и устраняет всех",
+    color: "text-purple-400",
+    bgColor: "bg-purple-400/10",
+    borderColor: "hover:border-purple-400/50",
+    team: "neutral",
+  },
+  {
+    icon: Scissors,
+    name: "Двуликий",
+    description: "Может менять сторону в течение игры",
+    color: "text-violet-400",
+    bgColor: "bg-violet-400/10",
+    borderColor: "hover:border-violet-400/50",
+    team: "neutral",
+  },
+  {
+    icon: UserX,
+    name: "Вдова",
+    description: "Выбирает мужа, меняет сторону при его смерти",
+    color: "text-purple-400",
+    bgColor: "bg-purple-400/10",
+    borderColor: "hover:border-purple-400/50",
+    team: "neutral",
+  },
+  {
+    icon: Sparkles,
+    name: "Коллекционер",
+    description: "Убивает, чередуя роли жертв",
+    color: "text-purple-400",
+    bgColor: "bg-purple-400/10",
+    borderColor: "hover:border-purple-400/50",
+    team: "neutral",
+  },
+  {
+    icon: Link2,
+    name: "Связанный",
+    description: "Связывает судьбу с другим игроком",
+    color: "text-rose-400",
+    bgColor: "bg-rose-400/10",
+    borderColor: "hover:border-rose-400/50",
+    team: "neutral",
   },
 ]
+
+function RoleCard({ role }: { role: typeof allRoles[0] }) {
+  return (
+    <div
+      className={`group relative rounded-2xl bg-card border border-border ${role.borderColor} transition-all duration-300 hover:-translate-y-1 hover:shadow-lg cursor-pointer overflow-hidden`}
+    >
+      {/* Hover glow */}
+      <div className={`absolute inset-0 ${role.bgColor} opacity-0 group-hover:opacity-50 transition-opacity duration-300`} />
+      
+      <div className="relative p-4 flex flex-col items-center text-center">
+        {/* Icon */}
+        <div className={`w-12 h-12 rounded-xl ${role.bgColor} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300`}>
+          <role.icon className={`w-6 h-6 ${role.color}`} />
+        </div>
+        
+        {/* Name */}
+        <h3 className="text-sm font-bold text-foreground mb-1">
+          {role.name}
+        </h3>
+        
+        {/* Description */}
+        <p className="text-xs text-muted-foreground leading-relaxed opacity-70 group-hover:opacity-100 transition-opacity line-clamp-2">
+          {role.description}
+        </p>
+      </div>
+    </div>
+  )
+}
 
 export default function RolesSection() {
   return (
@@ -77,40 +278,17 @@ export default function RolesSection() {
             Персонажи
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground mb-4 text-balance">
-            Роли в игре
+            Роли городской мафии
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Каждая роль уникальна и требует своей стратегии
           </p>
         </div>
 
-        {/* Roles Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4 lg:gap-6">
-          {roles.map((role) => (
-            <div
-              key={role.name}
-              className={`group relative rounded-2xl bg-card border border-border ${role.borderColor} transition-all duration-300 hover:-translate-y-2 hover:shadow-xl cursor-pointer overflow-hidden`}
-            >
-              {/* Hover glow */}
-              <div className={`absolute inset-0 ${role.bgColor} opacity-0 group-hover:opacity-50 transition-opacity duration-300`} />
-              
-              <div className="relative p-5 lg:p-6 flex flex-col items-center text-center">
-                {/* Icon */}
-                <div className={`w-14 h-14 lg:w-16 lg:h-16 rounded-xl ${role.bgColor} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                  <role.icon className={`w-7 h-7 lg:w-8 lg:h-8 ${role.color}`} />
-                </div>
-                
-                {/* Name */}
-                <h3 className="text-base lg:text-lg font-bold text-foreground mb-2">
-                  {role.name}
-                </h3>
-                
-                {/* Description - hidden on mobile, visible on hover for desktop */}
-                <p className="text-xs lg:text-sm text-muted-foreground leading-relaxed opacity-70 group-hover:opacity-100 transition-opacity">
-                  {role.description}
-                </p>
-              </div>
-            </div>
+        {/* All Roles Grid - unified display */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          {allRoles.map((role) => (
+            <RoleCard key={role.name} role={role} />
           ))}
         </div>
       </div>
