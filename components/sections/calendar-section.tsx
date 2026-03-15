@@ -75,8 +75,8 @@ export default function CalendarSection() {
       const response = await fetch('/api/events', {
         method: 'GET',
         headers: {
-          "apiKey": "sb_publishable_e6JuRRLBGZig8zVD53IYEw_xWFr0dDl",
-          "Authorization": "Bearer sb_publishable_e6JuRRLBGZig8zVD53IYEw_xWFr0dDl"
+          "apiKey": "c2JfcHVibGlzaGFibGVfZTZKdVJSTEJHWmlnOHpWRDUzSVlFd194V0ZyMGREbA==",
+          "Authorization": "Bearer c2JfcHVibGlzaGFibGVfZTZKdVJSTEJHWmlnOHpWRDUzSVlFd194V0ZyMGREbA=="
         }
       })
 
