@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/ui/button"
 import { Calendar, Clock, MapPin, Users, CreditCard, MessageCircle, Phone, Loader2 } from "lucide-react"
-import { createClient } from "@/lib/supabase/client"
 import useSWR from "swr"
 
 const PHONE_LINK = "tel:+79179700070"
@@ -20,21 +19,16 @@ interface Event {
   location: string
 }
 
-// Fetch events from Supabase
+// Fetch events from API route
 async function fetchEvents(): Promise<Event[]> {
-  const supabase = createClient()
+  const response = await fetch('/api/events')
   
-  const { data, error } = await supabase
-    .from('events')
-    .select('*')
-    .order('event_date', { ascending: true })
-    .order('event_time', { ascending: true })
-  
-  if (error) {
-    throw error
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}))
+    throw new Error(errorData.error || 'Failed to fetch events')
   }
   
-  return data || []
+  return response.json()
 }
 
 // Format date for display
