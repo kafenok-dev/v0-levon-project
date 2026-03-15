@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Calendar, Sparkles, PartyPopper } from "lucide-react"
+import { ArrowRight, Calendar, Sparkles } from "lucide-react"
 
 export default function HeroSection() {
   return (
@@ -20,13 +20,13 @@ export default function HeroSection() {
         <div className="absolute top-20 right-10 lg:right-20 opacity-10">
           <svg width="120" height="160" viewBox="0 0 120 160" fill="none" className="transform rotate-12">
             <rect x="10" y="10" width="100" height="140" rx="8" stroke="currentColor" strokeWidth="2" className="text-primary"/>
-            <text x="60" y="85" textAnchor="middle" className="text-primary fill-current text-4xl font-bold">{"♠"}</text>
+            <text x="60" y="85" textAnchor="middle" className="text-primary fill-current text-4xl font-bold">♠</text>
           </svg>
         </div>
         <div className="absolute bottom-20 left-10 lg:left-20 opacity-10">
           <svg width="100" height="140" viewBox="0 0 100 140" fill="none" className="transform -rotate-12">
             <rect x="5" y="5" width="90" height="130" rx="8" stroke="currentColor" strokeWidth="2" className="text-primary"/>
-            <text x="50" y="75" textAnchor="middle" className="text-primary fill-current text-4xl font-bold">{"♦"}</text>
+            <text x="50" y="75" textAnchor="middle" className="text-primary fill-current text-4xl font-bold">♦</text>
           </svg>
         </div>
         
@@ -46,7 +46,7 @@ export default function HeroSection() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card/50 backdrop-blur-sm border border-border mb-6 lg:mb-8">
             <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-sm text-muted-foreground">Клуб игроков в мафию</span>
+            <span className="text-sm text-muted-foreground">Присоединяйтесь к 1200+ игрокам</span>
           </div>
 
           {/* Main Heading */}
@@ -56,29 +56,29 @@ export default function HeroSection() {
 
           {/* Subheading */}
           <p className="text-xl sm:text-2xl lg:text-3xl text-foreground/90 font-medium mb-4 lg:mb-6 text-balance">
-            Клуб игроков в мафию
+            Самое большое сообщество игроков в мафию в городе
           </p>
 
           {/* Description */}
           <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto lg:mx-0 mb-8 lg:mb-10 leading-relaxed">
-            Сообщество людей из разных сфер, которых объединяет интеллектуальная игра, 
-            живое общение, новые знакомства и сильное комьюнити.
+            Интрига, психология, знакомства и сильное комьюнити в одном клубе.
+            Каждый вечер — новые эмоции и новые истории.
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 flex-wrap">
+          <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
             <Button
               asChild
               size="lg"
               className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-6 text-lg rounded-xl animate-glow-pulse"
             >
               <a
-                href="https://t.me/mafia_no1_club"
+                href="https://t.me/mafia_club"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2"
               >
-                Вступить в Телеграм клуб
+                Вступить в Telegram клуб
                 <ArrowRight className="w-5 h-5" />
               </a>
             </Button>
@@ -88,20 +88,9 @@ export default function HeroSection() {
               size="lg"
               className="w-full sm:w-auto border-border hover:bg-card text-foreground font-semibold px-8 py-6 text-lg rounded-xl"
             >
-              <a href="#calendar" className="flex items-center gap-2">
+              <a href="#formats" className="flex items-center gap-2">
                 <Calendar className="w-5 h-5" />
-                Посмотреть календарь игр
-              </a>
-            </Button>
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="w-full sm:w-auto border-border hover:bg-card text-foreground font-semibold px-8 py-6 text-lg rounded-xl"
-            >
-              <a href="#events" className="flex items-center gap-2">
-                <PartyPopper className="w-5 h-5" />
-                Заказать мероприятие
+                Посмотреть расписание игр
               </a>
             </Button>
           </div>

@@ -1,24 +1,21 @@
 "use client"
 
-import { Trophy, Medal, TrendingUp, Crown, ArrowRight, Users } from "lucide-react"
-import { Button } from "@/components/ui/button"
-
-const TELEGRAM_LINK = "https://t.me/mafia_no1_club"
+import { Trophy, Medal, TrendingUp, Crown } from "lucide-react"
 
 const cityLeaders = [
-  { rank: 1, name: "Игорь М.", points: 2847, games: 156, winrate: "68%" },
-  { rank: 2, name: "Анна К.", points: 2654, games: 142, winrate: "65%" },
-  { rank: 3, name: "Денис В.", points: 2531, games: 138, winrate: "62%" },
-  { rank: 4, name: "Ольга С.", points: 2420, games: 129, winrate: "59%" },
-  { rank: 5, name: "Павел Н.", points: 2315, games: 125, winrate: "58%" },
+  { rank: 1, name: "Игорь М.", points: 2847, games: 156 },
+  { rank: 2, name: "Анна К.", points: 2654, games: 142 },
+  { rank: 3, name: "Денис В.", points: 2531, games: 138 },
+  { rank: 4, name: "Ольга С.", points: 2420, games: 129 },
+  { rank: 5, name: "Павел Н.", points: 2315, games: 125 },
 ]
 
 const sportLeaders = [
-  { rank: 1, name: "Михаил Р.", points: 3124, games: 189, winrate: "71%" },
-  { rank: 2, name: "Елена Т.", points: 2987, games: 175, winrate: "69%" },
-  { rank: 3, name: "Артём Б.", points: 2856, games: 168, winrate: "66%" },
-  { rank: 4, name: "Наталья Д.", points: 2743, games: 162, winrate: "64%" },
-  { rank: 5, name: "Сергей К.", points: 2689, games: 155, winrate: "63%" },
+  { rank: 1, name: "Михаил Р.", points: 3124, games: 189 },
+  { rank: 2, name: "Елена Т.", points: 2987, games: 175 },
+  { rank: 3, name: "Артём Б.", points: 2856, games: 168 },
+  { rank: 4, name: "Наталья Д.", points: 2743, games: 162 },
+  { rank: 5, name: "Сергей К.", points: 2689, games: 155 },
 ]
 
 function LeaderTable({ leaders, title, icon: Icon }: { 
@@ -33,10 +30,7 @@ function LeaderTable({ leaders, title, icon: Icon }: {
         <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
           <Icon className="w-5 h-5 text-primary" />
         </div>
-        <div>
-          <h3 className="text-lg font-bold text-foreground">{title}</h3>
-          <p className="text-xs text-muted-foreground">ТОП-5 игроков месяца</p>
-        </div>
+        <h3 className="text-lg font-bold text-foreground">{title}</h3>
       </div>
       
       {/* Table */}
@@ -68,10 +62,7 @@ function LeaderTable({ leaders, title, icon: Icon }: {
               </div>
               <div>
                 <p className="font-semibold text-foreground">{player.name}</p>
-                <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                  <span>{player.games} игр</span>
-                  <span className="text-primary">WR: {player.winrate}</span>
-                </div>
+                <p className="text-xs text-muted-foreground">{player.games} игр</p>
               </div>
             </div>
             
@@ -113,7 +104,7 @@ export default function LeaderboardSection() {
         </div>
 
         {/* Leaderboards Grid */}
-        <div className="grid lg:grid-cols-2 gap-8 mb-12">
+        <div className="grid lg:grid-cols-2 gap-8">
           <LeaderTable 
             leaders={cityLeaders} 
             title="Городская мафия" 
@@ -124,61 +115,6 @@ export default function LeaderboardSection() {
             title="Спортивная мафия" 
             icon={Medal}
           />
-        </div>
-
-        {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button
-            asChild
-            variant="outline"
-            size="lg"
-            className="w-full sm:w-auto border-border hover:bg-card text-foreground font-semibold px-6 py-6 rounded-xl"
-          >
-            <a
-              href={TELEGRAM_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2"
-            >
-              <Trophy className="w-5 h-5 text-primary" />
-              Рейтинг городской мафии
-              <ArrowRight className="w-4 h-4" />
-            </a>
-          </Button>
-          <Button
-            asChild
-            variant="outline"
-            size="lg"
-            className="w-full sm:w-auto border-border hover:bg-card text-foreground font-semibold px-6 py-6 rounded-xl"
-          >
-            <a
-              href={TELEGRAM_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2"
-            >
-              <Medal className="w-5 h-5 text-amber-400" />
-              Рейтинг спортивной мафии
-              <ArrowRight className="w-4 h-4" />
-            </a>
-          </Button>
-          <Button
-            asChild
-            variant="outline"
-            size="lg"
-            className="w-full sm:w-auto border-border hover:bg-card text-foreground font-semibold px-6 py-6 rounded-xl"
-          >
-            <a
-              href={TELEGRAM_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2"
-            >
-              <Users className="w-5 h-5" />
-              Все игроки
-              <ArrowRight className="w-4 h-4" />
-            </a>
-          </Button>
         </div>
       </div>
     </section>
