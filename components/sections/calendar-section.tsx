@@ -76,7 +76,7 @@ export default function CalendarSection() {
         method: 'GET',
         headers: {
           "apiKey": "sb_publishable_e6JuRRLBGZig8zVD53IYEw_xWFr0dDl",
-          "Authorization": "sb_publishable_e6JuRRLBGZig8zVD53IYEw_xWFr0dDl"
+          "Authorization": "Bearer sb_publishable_e6JuRRLBGZig8zVD53IYEw_xWFr0dDl"
         }
       })
 
@@ -155,8 +155,8 @@ export default function CalendarSection() {
                 <div
                   key={event.id}
                   className={`group relative rounded-2xl bg-card border transition-all duration-300 hover:-translate-y-1 hover:shadow-xl overflow-hidden ${available || seatsUnknown
-                      ? "border-border hover:border-primary/50 hover:shadow-primary/10"
-                      : "border-border/50 opacity-60"
+                    ? "border-border hover:border-primary/50 hover:shadow-primary/10"
+                    : "border-border/50 opacity-60"
                     }`}
                 >
                   {/* Type badge */}
