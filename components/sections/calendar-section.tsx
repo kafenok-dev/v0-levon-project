@@ -24,21 +24,29 @@ interface Event {
 
 // Fetch events from Supabase
 async function fetchEvents(): Promise<Event[]> {
-  const supabase = createClient()
-  
-  const { data, error } = await supabase
-    .from('events')
-    .select('*')
-    .in('status', ['active', 'scheduled'])
-    .order('event_date', { ascending: true })
-    .order('event_time', { ascending: true })
-  
-  if (error) {
-    console.error('Error fetching events:', error)
-    throw error
+  try {
+    const supabase = createClient()
+    
+    console.log('[v0] Fetching events from Supabase...')
+    
+    const { data, error } = await supabase
+      .from('events')
+      .select('*')
+      .in('status', ['active', 'scheduled'])
+      .order('event_date', { ascending: true })
+      .order('event_time', { ascending: true })
+    
+    if (error) {
+      console.error('[v0] Supabase query error:', error)
+      throw error
+    }
+    
+    console.log('[v0] Events fetched successfully:', data?.length || 0, 'events')
+    return data || []
+  } catch (err) {
+    console.error('[v0] Error in fetchEvents:', err)
+    throw err
   }
-  
-  return data || []
 }
 
 // Format date for display
@@ -83,9 +91,12 @@ function getFormatColor(format: string) {
 }
 
 export default function CalendarSection() {
-  const { data: events, error, isLoading } = useSWR('events', fetchEvents, {
+  const { data: events, error, isLoading, mutate } = useSWR('events', fetchEvents, {
     revalidateOnFocus: false,
     dedupingInterval: 60000, // 1 minute
+    errorRetryCount: 3,
+    errorRetryInterval: 2000,
+    shouldRetryOnError: true,
   })
 
   return (
@@ -118,7 +129,7 @@ export default function CalendarSection() {
             <p className="text-muted-foreground mb-4">Не удалось загрузить события</p>
             <Button
               variant="outline"
-              onClick={() => window.location.reload()}
+              onClick={() => mutate()}
             >
               Попробовать снова
             </Button>
