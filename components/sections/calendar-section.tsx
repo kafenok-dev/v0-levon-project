@@ -24,11 +24,11 @@ function formatDate(dateStr: string): string {
   const date = new Date(dateStr)
   const days = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб']
   const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
-  
+
   const dayName = days[date.getDay()]
   const day = date.getDate()
   const month = months[date.getMonth()]
-  
+
   return `${dayName}, ${day} ${month}`
 }
 
@@ -69,15 +69,22 @@ export default function CalendarSection() {
   const fetchEvents = async () => {
     setIsLoading(true)
     setError(null)
-    
+
     try {
-      const response = await fetch('/api/events')
-      
+      // const response = await fetch('/api/events')
+      const response = await fetch('/api/events', {
+        method: 'GET',
+        headers: {
+          "apiKey": "sb_publishable_e6JuRRLBGZig8zVD53IYEw_xWFr0dDl",
+          "Authorization": "sb_publishable_e6JuRRLBGZig8zVD53IYEw_xWFr0dDl"
+        }
+      })
+
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}))
         throw new Error(errorData.error || 'Failed to fetch events')
       }
-      
+
       const data = await response.json()
       setEvents(data)
     } catch (err) {
@@ -143,15 +150,14 @@ export default function CalendarSection() {
             {events.map((event) => {
               const available = event.available_seats !== null && event.available_seats > 0
               const seatsUnknown = event.available_seats === null
-              
+
               return (
                 <div
                   key={event.id}
-                  className={`group relative rounded-2xl bg-card border transition-all duration-300 hover:-translate-y-1 hover:shadow-xl overflow-hidden ${
-                    available || seatsUnknown
-                      ? "border-border hover:border-primary/50 hover:shadow-primary/10" 
+                  className={`group relative rounded-2xl bg-card border transition-all duration-300 hover:-translate-y-1 hover:shadow-xl overflow-hidden ${available || seatsUnknown
+                      ? "border-border hover:border-primary/50 hover:shadow-primary/10"
                       : "border-border/50 opacity-60"
-                  }`}
+                    }`}
                 >
                   {/* Type badge */}
                   <div className="absolute top-4 right-4">
@@ -201,7 +207,7 @@ export default function CalendarSection() {
                         size="sm"
                         disabled={!available && !seatsUnknown}
                         className={available || seatsUnknown
-                          ? "bg-primary hover:bg-primary/90 text-primary-foreground" 
+                          ? "bg-primary hover:bg-primary/90 text-primary-foreground"
                           : "bg-muted text-muted-foreground cursor-not-allowed"
                         }
                       >
