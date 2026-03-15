@@ -1,15 +1,17 @@
-import { createClient as createSupabaseClient } from '@supabase/supabase-js'
+import { createClient as createSupabaseClient, SupabaseClient } from '@supabase/supabase-js'
 
-let client: ReturnType<typeof createSupabaseClient> | null = null
+// Use globalThis to persist the client across hot module reloads
+const globalForSupabase = globalThis as typeof globalThis & {
+  supabaseClient?: SupabaseClient
+}
 
 export function createClient() {
-  // Use singleton pattern to avoid creating multiple clients
-  if (!client) {
-    client = createSupabaseClient(
+  if (!globalForSupabase.supabaseClient) {
+    globalForSupabase.supabaseClient = createSupabaseClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
     )
   }
   
-  return client
+  return globalForSupabase.supabaseClient
 }
