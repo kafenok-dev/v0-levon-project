@@ -13,12 +13,11 @@ interface Event {
   id: number
   title: string
   event_date: string
-  event_time: string
+  event_time: string | null
   type: string
   price: number
-  available_seats: number
+  available_seats: number | null
   location: string
-  status: string
 }
 
 // Fetch events from Supabase
@@ -28,7 +27,6 @@ async function fetchEvents(): Promise<Event[]> {
   const { data, error } = await supabase
     .from('events')
     .select('*')
-    .in('status', ['active', 'scheduled'])
     .order('event_date', { ascending: true })
     .order('event_time', { ascending: true })
   
@@ -58,7 +56,8 @@ function formatTime(timeStr: string): string {
 }
 
 // Format seats for display
-function formatSeats(available: number): string {
+function formatSeats(available: number | null): string {
+  if (available === null) return "-"
   if (available <= 0) return "Мест нет"
   if (available === 1) return "1 место"
   if (available >= 2 && available <= 4) return `${available} места`
@@ -139,13 +138,14 @@ export default function CalendarSection() {
         {events && events.length > 0 && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
             {events.map((event) => {
-              const available = event.available_seats > 0
+              const available = event.available_seats !== null && event.available_seats > 0
+              const seatsUnknown = event.available_seats === null
               
               return (
                 <div
                   key={event.id}
                   className={`group relative rounded-2xl bg-card border transition-all duration-300 hover:-translate-y-1 hover:shadow-xl overflow-hidden ${
-                    available 
+                    available || seatsUnknown
                       ? "border-border hover:border-primary/50 hover:shadow-primary/10" 
                       : "border-border/50 opacity-60"
                   }`}
@@ -169,17 +169,19 @@ export default function CalendarSection() {
                         <Calendar className="w-4 h-4 text-primary flex-shrink-0" />
                         <span className="text-sm">{formatDate(event.event_date)}</span>
                       </div>
-                      <div className="flex items-center gap-3 text-muted-foreground">
-                        <Clock className="w-4 h-4 text-primary flex-shrink-0" />
-                        <span className="text-sm">{formatTime(event.event_time)}</span>
-                      </div>
+                      {event.event_time && (
+                        <div className="flex items-center gap-3 text-muted-foreground">
+                          <Clock className="w-4 h-4 text-primary flex-shrink-0" />
+                          <span className="text-sm">{formatTime(event.event_time)}</span>
+                        </div>
+                      )}
                       <div className="flex items-center gap-3 text-muted-foreground">
                         <MapPin className="w-4 h-4 text-primary flex-shrink-0" />
                         <span className="text-sm">{event.location}</span>
                       </div>
                       <div className="flex items-center gap-3 text-muted-foreground">
                         <Users className="w-4 h-4 text-primary flex-shrink-0" />
-                        <span className={`text-sm ${!available ? "text-destructive" : ""}`}>
+                        <span className={`text-sm ${!available && !seatsUnknown ? "text-destructive" : ""}`}>
                           {formatSeats(event.available_seats)}
                         </span>
                       </div>
@@ -194,18 +196,18 @@ export default function CalendarSection() {
                       <Button
                         asChild
                         size="sm"
-                        disabled={!available}
-                        className={available 
+                        disabled={!available && !seatsUnknown}
+                        className={available || seatsUnknown
                           ? "bg-primary hover:bg-primary/90 text-primary-foreground" 
                           : "bg-muted text-muted-foreground cursor-not-allowed"
                         }
                       >
                         <a
-                          href={available ? TELEGRAM_LINK : undefined}
-                          target={available ? "_blank" : undefined}
-                          rel={available ? "noopener noreferrer" : undefined}
+                          href={available || seatsUnknown ? TELEGRAM_LINK : undefined}
+                          target={available || seatsUnknown ? "_blank" : undefined}
+                          rel={available || seatsUnknown ? "noopener noreferrer" : undefined}
                         >
-                          {available ? "Записаться" : "Мест нет"}
+                          {available || seatsUnknown ? "Записаться" : "Мест нет"}
                         </a>
                       </Button>
                     </div>
